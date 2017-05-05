@@ -36,7 +36,7 @@ class Button(object):
 
 #------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	#vérifie si on a appuye sur le bouton (si la simulation est lance)
+	#verifie si on a appuye sur le bouton (si la simulation est lance)
 	def check_is_started(self):
 		return self.is_start
 
