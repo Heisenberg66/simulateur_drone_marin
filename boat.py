@@ -4,7 +4,10 @@ import pygame
 from math import degrees,radians,sqrt
 from arm_sonar import Arm_sonar
 
-#Class Boat
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------- Class Boat ------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+
 
 class Boat(pymunk.Body):
 
@@ -31,7 +34,10 @@ class Boat(pymunk.Body):
 		self.screen=sc
 		self.angle_arms = 0
 
-	# Getters / Setters
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------- GETTERS / SETTERS -----------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------------------------------
 
 	def _get_body(self):
 		return self._body
@@ -44,6 +50,8 @@ class Boat(pymunk.Body):
 
 	def _get_shape(self):
 		return self._shape
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
 
 	# Deplace le bateau dans un direction 
 
@@ -98,6 +106,7 @@ class Boat(pymunk.Body):
 		direction = pymunk.Vec2d(1, 0).rotated(self._shape.body.angle)
 		self._shape.body.velocity = self._speed * direction		
 		
+# ----------------------------------------------------------------------------------------------------------------------------------------------
 
 	#oriente le bateau directement vers l'angle qu'on calcul
 
@@ -109,12 +118,16 @@ class Boat(pymunk.Body):
 		direction = pymunk.Vec2d(1, 0).rotated(self._shape.body.angle)
 		self._shape.body.velocity = self._speed * direction
 
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+
 	# immobilise le bateau 
 
 	def immobilize_boat(self):
 		self._speed=0
 		direction = pymunk.Vec2d(1, 0).rotated(self._shape.body.angle)
 		self._shape.body.velocity = self._speed * direction
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
 
 	# creation des bras du sonar 
 
@@ -143,6 +156,8 @@ class Boat(pymunk.Body):
 		self.angle_arms = 30
 		self.rotate_left_right(self.angle_arms)
 
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+
 	# Affichage des bras 
 
 	def draw_arms_sonar(self):
@@ -153,6 +168,9 @@ class Boat(pymunk.Body):
 			self.rotate_left_right(self.angle_arms)
 			arm.draw_arm()
 
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+
 	# Rotation des bras droit et gauche 
 	# 	le bras au centre garde le meme angle que le bateau 
 
@@ -161,6 +179,8 @@ class Boat(pymunk.Body):
 		self.arms_sonar[1].rotate_arm(degrees(self._shape.body.angle))
 		self.arms_sonar[2].rotate_arm(degrees(self._shape.body.angle)-angle)
 
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
 
 	# renvoie la distance entre 2 points
 
@@ -176,16 +196,24 @@ class Boat(pymunk.Body):
 
 		return distance
 
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
 	
 	# angle du point donne en parametre
 		
 	def angle_to_point(self,point):
 		return -numpy.arctan2(((point.Y+50)-(self.screen.get_size()[1]-self.body.position[1])),((point.X+15)-(self.body.position[0])))
 
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+
 	# angle entre l'angle courant et l'angle donne en parametre
 
 	def difference_angle(self,angle):
 		return abs(abs(angle)-abs(self._shape.body.angle))
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
 
 	#ajustement de la vitesse du bateau en fonction de l'angle et la distance du prochain point 
 
@@ -217,6 +245,9 @@ class Boat(pymunk.Body):
 
 
 
+#-----------------------------------------------------------------------------------------------------------------------------------------------		
+#--------------------------------------------------------------- Property ----------------------------------------------------------------------		
+#-----------------------------------------------------------------------------------------------------------------------------------------------		
 
 
 	body = property (_get_body)
