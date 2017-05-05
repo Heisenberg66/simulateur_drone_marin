@@ -4,17 +4,11 @@
 
 ### Developpement d’un simulateur de navigation pour un drone marin de surface avec une IA detecteur d’obstacles. 
 ### Utilisation des approches d’apprentissage par renforcement (reinforcement learning)
-#
-#
 
 - Encadrants Michel Menard, Bruno Lescalier
 - laboratoire L3i
 - Développement en Python
 
-#
-#
-#
-#
 #### Principe de fonctionnement (pour l'instant) 
 
 Clic gauche sur la carte pour placer un marker, clic droit pour le supprimer. Bouton Clear pour supprimmer tous les markers. Bouton Start pour lancer la simulation. 
@@ -25,7 +19,7 @@ Le "bateau" va suivre le trajet, les rayons détectent les obstacles fixes (pont
 [![N|Solid](https://image.noelshack.com/fichiers/2017/18/1493975324-capture-d-ecran-2017-05-05-a-10-25-34.png)](https://nodesource.com/products/nsolid)
 
 ### Installation 
-#
+
 | util | lien |
 |-----|-------|
 |OS| [Mac osX Sierra 10.12.1] |
