@@ -9,6 +9,7 @@ from pygame.locals import FULLSCREEN
 from markerMap import MarkerMap
 from Button import Button
 from boat import Boat
+from Moving_obstacle import Moving_obstacle
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -31,6 +32,7 @@ def redraw():
 		#on draw le label si jamais on a clique sur un pixel non bleu
 		if label_impossible == True:
 			fenetre.blit(surface, (400,10))
+
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -59,8 +61,11 @@ def redraw_empty():
 #draw la fenetre avec le fond, les boutons et le bateau 
 def redraw_simulation():
 	redraw_empty()
+	MO.draw_circle()
 	boat1.draw_arms_sonar()
 	space.debug_draw(draw_options)
+	
+
 
 
 
@@ -104,6 +109,28 @@ pygame.display.set_caption("Simulateur de navigation (Q-learning et neural netwo
 clock = pygame.time.Clock()
 space = pymunk.Space() 
 space.gravity = (0.0, 0.0)
+
+static = [pymunk.Segment(
+                space.static_body,
+                (0, 1), (0,fenetre.get_size()[1]), 1),
+            pymunk.Segment(
+                space.static_body,
+                (1, fenetre.get_size()[1]), (fenetre.get_size()[0], fenetre.get_size()[1]), 1),
+            pymunk.Segment(
+                space.static_body,
+                (fenetre.get_size()[0]-1, fenetre.get_size()[1]), (fenetre.get_size()[0]-1, 1), 1),
+            pymunk.Segment(
+                space.static_body,
+                (1, 1), (fenetre.get_size()[0], 1), 1)
+        ]
+for s in static:
+	s.friction = 1
+	s.group = 1
+	s.collision_type = 1
+	s.color = (0,0,255)
+space.add(static)
+
+
 draw_options = pymunk.pygame_util.DrawOptions(fenetre)
 
 
@@ -141,6 +168,8 @@ boat1 = Boat(fenetre,depart.X+15, fenetre.get_size()[1]-depart.Y-50,10,space)
 boat1.shape.color = (0,255,0)
 boat1.create_arms(30)
 
+MO = Moving_obstacle(fenetre,480,300 ,10,space)
+
 #autre variables 
 
 index_list = 0 #index du waypoint destination pendant la simulation
@@ -148,7 +177,6 @@ index_list = 0 #index du waypoint destination pendant la simulation
 
 #afficher ou non le texte "marker impossible a placer ici"
 label_impossible = False
-
 
 #refresh ecran
 pygame.display.flip()

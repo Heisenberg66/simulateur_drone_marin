@@ -83,7 +83,7 @@ class Point_sonar(object):
 
 		
 		if(self._X>0 and self._Y>0 and self._X<self.screen.get_size()[0] and self._Y<self.screen.get_size()[1] and \
-			self.screen.get_at((int(round(self._X)),int(round(self._Y))))!=(160,211,211,255)):
+			self.screen.get_at((int(self._X),int(self._Y)))!=(160,211,211,255)):
 			
 			self._collide_with_object=True
 		else:
@@ -95,8 +95,8 @@ class Point_sonar(object):
 	# Affichage du point
 
 	def draw_point(self):
-
 		pygame.draw.circle(self.screen, (0,0,0), (int(round(self._X)) ,int(round(self.Y))), self._radius, 0)
+
 	
 	
 #-----------------------------------------------------------------------------------------------------------------------------------------------		
