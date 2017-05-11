@@ -20,19 +20,20 @@ class Boat(pymunk.Body):
 	# - liste de Arm_sonar 
 	# - fenetre pygame
 
-	def __init__(self,sc,posX,posY,rad,space):
+	def __init__(self,sc,posX,posY,rad,spc):
 		self._mass=1
 		self._radius=rad
 		self._moment = pymunk.moment_for_circle(self._mass, 0, self._radius)
 		self._body = pymunk.Body(self._mass, self._moment)
 		self._body.position = posX, posY 
 		self._shape = pymunk.Circle(self._body, self._radius) 
-		space.add(self._body, self._shape)
 		self.p = int(self._shape._body.position.x), 600-int(self._shape._body.position.y)
 		self._speed= 100
 		self.arms_sonar = []
 		self.screen=sc
 		self.angle_arms = 0
+		self._space=spc
+		self._maxspeed=300
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,6 +51,24 @@ class Boat(pymunk.Body):
 
 	def _get_shape(self):
 		return self._shape
+
+	def _set_maxspeed(self,ms):
+		self._maxspeed=ms
+
+	def _get_maxspeed(self):
+		return self._maxspeed
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+
+	def add_to_space(self):
+		self.space.add(self._body,self._shape)
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+
+	def remove_from_space(self):
+		self.space.remove(self._body,self._shape)
+
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -116,7 +135,6 @@ class Boat(pymunk.Body):
 		#update l'angle
 		self._shape.body.angle = round(agl,1)
 		direction = pymunk.Vec2d(1, 0).rotated(self._shape.body.angle)
-		self._shape.body.velocity = self._speed * direction
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -211,7 +229,25 @@ class Boat(pymunk.Body):
 	# angle entre l'angle courant et l'angle donne en parametre
 
 	def difference_angle(self,angle):
-		return abs(abs(angle)-abs(self._shape.body.angle))
+		# diff angle 
+		agl_diff_from_0 = degrees(abs(angle))
+		agl_diff_from_pi = degrees(3.14 - abs(angle))
+
+		#diff slef.shape.body.angle
+
+		angle_diff_from_0=degrees(abs(self._shape.body.angle))
+		angle_diff_from_pi = degrees(3.14 - abs(self._shape.body.angle))
+
+		if (angle>=0 and self._shape.body.angle>=0) or (angle <0 and self._shape.body.angle<0):
+			return abs(angle_diff_from_0-agl_diff_from_0)
+		elif (angle_diff_from_0+agl_diff_from_0)<(angle_diff_from_pi+agl_diff_from_pi):
+			return abs(angle_diff_from_0+agl_diff_from_0)
+		else:
+			return abs(angle_diff_from_pi+agl_diff_from_pi)
+
+
+
+
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -223,10 +259,10 @@ class Boat(pymunk.Body):
 		distance_to_point = self.distance_between_point(wplist[index])
 		distance_until_finish = self.distance_to_finish(wplist,index)
 
-		if(distance_until_finish<100 and distance_until_finish>20 and self.speed>100):
+		if(distance_until_finish<100 and distance_until_finish>20 and self.speed>50):
 			return -10
 		
-		elif(self._speed > 100 and distance_to_point <= 100 and index<len(wplist)-1):
+		elif(self._speed > 80 and distance_to_point <= 50 and index<len(wplist)-1):
 			difference_angle = self.difference_angle(self.angle_to_point(wplist[index+1]))
 			if difference_angle<= radians(45):
 				return 0
@@ -237,12 +273,18 @@ class Boat(pymunk.Body):
 			else:
 				return -15
 		
-		elif(self._speed<300 and index> 0 and self.distance_between_point(wplist[index-1])>5):
-			return 40
+		elif(self._speed<self._maxspeed and index> 0 and self.distance_between_point(wplist[index-1])>20):
+			return 20
 		
 		else:
 			return 0
 
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------
+
+# dessine un cercle au meme coordonnees que le body pymunk, util pour le sonar (detection des pixels )
+	def draw_circle (self):
+		pygame.draw.circle(self.screen,(255,0,0),(int(self._body.position[0]),int(self.screen.get_size()[1]-self._body.position[1])),self._radius,0)
 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------		
@@ -253,5 +295,6 @@ class Boat(pymunk.Body):
 	body = property (_get_body)
 	speed = property (_get_speed,_set_speed)
 	shape = property (_get_shape)
+	maxspeed = property(_get_maxspeed,_set_maxspeed)
 
 

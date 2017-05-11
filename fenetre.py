@@ -9,7 +9,7 @@ from pygame.locals import FULLSCREEN
 from markerMap import MarkerMap
 from Button import Button
 from boat import Boat
-from Moving_obstacle import Moving_obstacle
+from simulation_bateau import Simulation_bateau
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,6 +32,10 @@ def redraw():
 		#on draw le label si jamais on a clique sur un pixel non bleu
 		if label_impossible == True:
 			fenetre.blit(surface, (400,10))
+
+		if draw_trajets:
+			simu.draw_lignes()
+
 
 
 
@@ -61,7 +65,7 @@ def redraw_empty():
 #draw la fenetre avec le fond, les boutons et le bateau 
 def redraw_simulation():
 	redraw_empty()
-	MO.draw_circle()
+	simu.run()
 	boat1.draw_arms_sonar()
 	space.debug_draw(draw_options)
 	
@@ -107,8 +111,10 @@ pygame.display.set_caption("Simulateur de navigation (Q-learning et neural netwo
 
 #pymunk space
 clock = pygame.time.Clock()
-space = pymunk.Space() 
+space = pymunk.Space()
 space.gravity = (0.0, 0.0)
+
+#delimitation physique de la fenetre
 
 static = [pymunk.Segment(
                 space.static_body,
@@ -152,7 +158,6 @@ waypoint = pygame.transform.scale(waypoint, (31,50))
 
 waypointList = []
 
-
 #boutons
 
 b1= Button("START")
@@ -165,10 +170,13 @@ b2.draw(fenetre,(940,610,130,50),(945,620),50)
 
 #bateau
 boat1 = Boat(fenetre,depart.X+15, fenetre.get_size()[1]-depart.Y-50,10,space)
+boat1.add_to_space()
 boat1.shape.color = (0,255,0)
 boat1.create_arms(30)
 
-MO = Moving_obstacle(fenetre,480,300 ,10,space)
+#simulation autres bateaux
+simu = Simulation_bateau(fenetre,space)
+
 
 #autre variables 
 
@@ -177,6 +185,9 @@ index_list = 0 #index du waypoint destination pendant la simulation
 
 #afficher ou non le texte "marker impossible a placer ici"
 label_impossible = False
+draw_trajets = False
+
+simu = Simulation_bateau(fenetre,space)
 
 #refresh ecran
 pygame.display.flip()
@@ -187,6 +198,27 @@ pygame.display.flip()
 
 while True:
 	for event in pygame.event.get():
+
+
+	#-----------------------------------------------------------------------------------------------------------------------------------------------
+	#----------------------------------------------------------- Action keyboard -------------------------------------------------------------------
+	#-----------------------------------------------------------------------------------------------------------------------------------------------
+
+		if event.type == pygame.KEYDOWN:
+
+			#---------------------------------------------------------------------------------------------------------------------------------------
+
+			# si on presse "espace" affiche les trajets des bateaux
+
+			if event.key == pygame.K_SPACE:
+
+				if draw_trajets:
+					draw_trajets=False
+					redraw()
+				else:
+					draw_trajets=True
+					redraw()
+					simu.draw_lignes()
 
 	#-----------------------------------------------------------------------------------------------------------------------------------------------
 	#----------------------------------------------------- Action au clic gauche -------------------------------------------------------------------
@@ -209,6 +241,7 @@ while True:
 					index_list=0
 					b1.change_started_bool()
 					b1.change_appearance()
+					simu.stop()
 					redraw()
 
 				#si la simulaiton n'est pas lance
@@ -217,6 +250,7 @@ while True:
 					boat1.speed=300
 					b1.change_started_bool()
 					b1.change_appearance()
+					simu.start()
 					redraw_empty()
 
 				
@@ -308,7 +342,7 @@ while True:
 		#si on n est pas au dernier waypoint
 		if(index_list<len(waypointList)):
 			
-			boat1.move_boat(waypointList,index_list) # pour move boat, whyt not give the entire list and the index 
+			boat1.move_boat(waypointList,index_list)
 			space.step(1/100.0)
 			pygame.display.flip()	
 			clock.tick(100)
@@ -318,6 +352,7 @@ while True:
 			#retour du bateau au debut 
 			boat1.body.position = depart.X+15, fenetre.get_size()[1]-depart.Y-50
 			boat1.immobilize_boat()
+			simu.stop()
 			b1.change_started_bool()
 			b1.change_appearance()
 			redraw()
