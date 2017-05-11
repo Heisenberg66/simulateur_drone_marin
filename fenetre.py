@@ -187,7 +187,6 @@ index_list = 0 #index du waypoint destination pendant la simulation
 label_impossible = False
 draw_trajets = False
 
-simu = Simulation_bateau(fenetre,space)
 
 #refresh ecran
 pygame.display.flip()
