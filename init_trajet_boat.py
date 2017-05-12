@@ -66,19 +66,19 @@ class Init_trajet_boat(object):
 	def init_trajet_5(self):
 		list_t = []
 		list_t.append(MarkerMap(608, 75,None))
-		list_t.append(MarkerMap(647, 193,None))
+		list_t.append(MarkerMap(648, 180,None))
 		list_t.append(MarkerMap(542, 204,None))
-		list_t.append(MarkerMap(467, 82,None))
+		list_t.append(MarkerMap(490, 33,None))
 		list_t.append(MarkerMap(538, -44,None))
 		return list_t
 
 	def init_trajet_6(self):
 		list_t = []
 		list_t.append(MarkerMap(478, 237,None))
-		list_t.append(MarkerMap(436, 253,None))
-		list_t.append(MarkerMap(405, 118,None))
-		list_t.append(MarkerMap(499, 97,None))
-		list_t.append(MarkerMap(525, 192,None))
+		list_t.append(MarkerMap(451, 241,None))
+		list_t.append(MarkerMap(423, 134,None))
+		list_t.append(MarkerMap(482, 115,None))
+		list_t.append(MarkerMap(509, 189,None))
 		list_t.append(MarkerMap(492, 212,None))
 		return list_t
 
@@ -86,9 +86,9 @@ class Init_trajet_boat(object):
 		list_t = []
 		list_t.append(MarkerMap(458, 483,None))
 		list_t.append(MarkerMap(424, 389,None))
-		list_t.append(MarkerMap(465, 364,None))
-		list_t.append(MarkerMap(401, 111,None))
-		list_t.append(MarkerMap(455, 125,None))
+		list_t.append(MarkerMap(452, 380,None))
+		list_t.append(MarkerMap(388, 111,None))
+		list_t.append(MarkerMap(448, 96,None))
 		list_t.append(MarkerMap(419, -45,None))
 		return list_t
 
@@ -110,7 +110,7 @@ class Init_trajet_boat(object):
 		list_t.append(MarkerMap(449, 31,None))
 		list_t.append(MarkerMap(454, 108,None))
 		list_t.append(MarkerMap(408, 125,None))
-		list_t.append(MarkerMap(436, 242,None))
+		list_t.append(MarkerMap(439, 260,None))
 		list_t.append(MarkerMap(245, 310,None))
 		return list_t
 
@@ -118,8 +118,8 @@ class Init_trajet_boat(object):
 		list_t = []
 		list_t.append(MarkerMap(78, 625,None))
 		list_t.append(MarkerMap(39, 182,None))
-		list_t.append(MarkerMap(92, 86,None))
-		list_t.append(MarkerMap(296, 29,None))
+		list_t.append(MarkerMap(119, 118,None))
+		list_t.append(MarkerMap(306, 59,None))
 		list_t.append(MarkerMap(425, 37,None))
 		list_t.append(MarkerMap(495, 112,None))
 		list_t.append(MarkerMap(533, 213,None))
@@ -136,12 +136,13 @@ class Init_trajet_boat(object):
 		return list_t
 
 	def init_trajet_12(self):
+
 		list_t = []
 		list_t.append(MarkerMap(205, 218,None))
 		list_t.append(MarkerMap(410, 158,None))
 		list_t.append(MarkerMap(418, 84,None))
 		list_t.append(MarkerMap(483, 108,None))
-		list_t.append(MarkerMap(535, 216,None))
-		list_t.append(MarkerMap(602, 224,None))
-		list_t.append(MarkerMap(845, 274,None))
+		list_t.append(MarkerMap(524, 226,None))
+		list_t.append(MarkerMap(651, 205,None))
+		list_t.append(MarkerMap(852, 245,None))
 		return list_t

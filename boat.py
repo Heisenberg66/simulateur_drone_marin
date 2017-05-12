@@ -230,13 +230,13 @@ class Boat(pymunk.Body):
 
 	def difference_angle(self,angle):
 		# diff angle 
-		agl_diff_from_0 = degrees(abs(angle))
-		agl_diff_from_pi = degrees(3.14 - abs(angle))
+		agl_diff_from_0 = abs(angle)
+		agl_diff_from_pi = 3.14 - abs(angle)
 
 		#diff slef.shape.body.angle
 
-		angle_diff_from_0=degrees(abs(self._shape.body.angle))
-		angle_diff_from_pi = degrees(3.14 - abs(self._shape.body.angle))
+		angle_diff_from_0=abs(self._shape.body.angle)
+		angle_diff_from_pi = 3.14 - abs(self._shape.body.angle)
 
 		if (angle>=0 and self._shape.body.angle>=0) or (angle <0 and self._shape.body.angle<0):
 			return abs(angle_diff_from_0-agl_diff_from_0)
@@ -273,7 +273,7 @@ class Boat(pymunk.Body):
 			else:
 				return -15
 		
-		elif(self._speed<self._maxspeed and index> 0 and self.distance_between_point(wplist[index-1])>20):
+		elif(self._speed<self._maxspeed and index> 0 and self.distance_between_point(wplist[index-1])>10):
 			return 20
 		
 		else:
