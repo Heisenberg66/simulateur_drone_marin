@@ -1,0 +1,3 @@
+Dans un premier temps, je remercie l’équipe pédagogique de l’Université de La Rochelle qui, pendant ces trois années de Licence, m’auront permis d’acquérir les connaissances nécessaires pour réaliser ce stage. 
+	Ensuite j’aimerais remercier le Laboratoire Informatique, Image et Interaction de m’avoir accueilli et permis de faire ce stage dans de bonne condition.
+	Enfin, je tiens à remercier mon maitre de stage, Mr Michel Menard, de m’avoir guidé pendant toute la durée du stage. J’aimerais également le remercier pour les conseils, l’aide et toute la documentation qu’il m’a fourni pour m’aider a bien comprendre le sujet du stage. 

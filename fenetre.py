@@ -5,7 +5,6 @@ import numpy #fonctions mathematiques avancees
 import pymunk
 import pymunk.pygame_util
 from pygame.locals import *
-from pygame.locals import FULLSCREEN
 from markerMap import MarkerMap
 from Button import Button
 from boat import Boat
@@ -278,7 +277,6 @@ while True:
 					#si le pixel est bleu , cration d'un nouveau marker + ajout dans la liste
 					m=MarkerMap(event.pos[0]-waypoint.get_rect().size[0]/2,event.pos[1]-waypoint.get_rect().size[1],waypoint)
 					waypointList.append(m);
-					print(m.X,m.Y)
 					
 				else:
 					

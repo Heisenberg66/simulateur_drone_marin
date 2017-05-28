@@ -13,10 +13,24 @@
 
 Clic gauche sur la carte pour placer un marker, clic droit pour le supprimer. Bouton Clear pour supprimmer tous les markers. Bouton Start pour lancer la simulation. 
 Le "bateau" va suivre le trajet, les rayons détectent les obstacles fixes (pontons, plage,...) mais ne les évite pas pour l'instant. 
+Le simulateur affiche aussi 5bateaux
+
+#### Description des classes  
+#
+- fenetre.py : initialisation + boucle d'événements
+- Button.py : création des objets "boutons" (start/stop et clear)
+- MarkerMap : coordonnées et image des markers
+- boat.py : hérite de Pymunk.body, gestion des mouvments du drone et s des bateaux simulés
+- arm_sonar : création, translation, rotation d'un bras du sonar
+- point_sonar : création, translation, rotation d'un point d'un bras  du sonar
+- init_trajet_boat : création de 12 trajets pour les bateaux simulés
+- trajet_bateau : déplacement sur un trajet d'un bateau simulé
+- simulation_bateau : gestion des trajets de tous les bateaux simulés
+
 
 [![N|Solid](https://image.noelshack.com/fichiers/2017/18/1493975328-capture-d-ecran-2017-05-05-a-10-26-32.png)](https://nodesource.com/products/nsolid)
 
-[![N|Solid](https://image.noelshack.com/fichiers/2017/18/1493975324-capture-d-ecran-2017-05-05-a-10-25-34.png)](https://nodesource.com/products/nsolid)
+[![N|Solid]()](https://nodesource.com/products/nsolid)
 
 ### Installation 
 

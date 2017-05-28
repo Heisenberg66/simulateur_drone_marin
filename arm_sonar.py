@@ -24,7 +24,9 @@ class Arm_sonar(object):
 		self.angle_boat= ab
 		self.distance_from_boat = 15
 		self.distance_between_points = 5
+		self.nb_point_arm = 10
 		self.points_sonar = []
+
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -35,7 +37,7 @@ class Arm_sonar(object):
 
 	def create_arm(self):
 		
-		for i in range(1, 21):
+		for i in range(1, self.nb_point_arm+1):
 			self.points_sonar.append(Point_sonar(self.screen , self.distance_from_boat +  \
 				self.X_center_boat+ (self.distance_between_points * i), self.Y_center_boat))
 
