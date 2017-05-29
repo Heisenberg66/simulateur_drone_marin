@@ -30,7 +30,7 @@ Le simulateur affiche aussi 5bateaux
 
 [![N|Solid](https://image.noelshack.com/fichiers/2017/18/1493975328-capture-d-ecran-2017-05-05-a-10-26-32.png)](https://nodesource.com/products/nsolid)
 
-[![N|Solid]()](https://nodesource.com/products/nsolid)
+[![N|Solid](https://image.noelshack.com/fichiers/2017/22/1496051495-capture-d-ecran-2017-05-28-a-14-28-19.png)](https://nodesource.com/products/nsolid)
 
 ### Installation 
 
