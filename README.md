@@ -16,7 +16,7 @@ Le "bateau" va suivre le trajet, les rayons détectent les obstacles fixes (pont
 Le simulateur affiche aussi 5bateaux
 
 #### Description des classes  
-#
+
 - fenetre.py : initialisation + boucle d'événements
 - Button.py : création des objets "boutons" (start/stop et clear)
 - MarkerMap : coordonnées et image des markers
