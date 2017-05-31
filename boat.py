@@ -3,6 +3,9 @@ import numpy
 import pygame
 from math import degrees,radians,sqrt
 from arm_sonar import Arm_sonar
+from neural_network.make_sonar_combinaison import make_combinaisons
+from neural_network.gen_verite_terrain import make_truth
+from neural_network.neural_network import Neural_network
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
 # ---------------------------------------------------------- Class Boat ------------------------------------------------------------------------
@@ -286,6 +289,22 @@ class Boat(pymunk.Body):
 	def draw_circle (self):
 		pygame.draw.circle(self.screen,(255,0,0),(int(self._body.position[0]),int(self.screen.get_size()[1]-self._body.position[1])),self._radius,0)
 
+
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------
+
+# creation et entrainement du reseau de neurones a partir des combinaison et de la verite terrain 
+	def init_nn(self):
+		combi  = make_combinaisons(self.screen)
+
+		self.nn= Neural_network(self.screen,combi,make_truth(self.screen,combi))
+
+		self.nn.setup_network()
+
+		self.nn.train_network()
+
+	def a(self):
+		lol = make_combinaisons(self.screen)
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------		
 #--------------------------------------------------------------- Property ----------------------------------------------------------------------		
