@@ -170,6 +170,7 @@ b2.draw(fenetre,(940,610,130,50),(945,620),50)
 boat1 = Boat(fenetre,depart.X+15, fenetre.get_size()[1]-depart.Y-50,10,space)
 boat1.add_to_space()
 boat1.shape.color = (0,255,0)
+boat1.init_nn()
 boat1.create_arms(30)
 
 #simulation autres bateaux
@@ -184,45 +185,6 @@ index_list = 0 #index du waypoint destination pendant la simulation
 #afficher ou non le texte "marker impossible a placer ici"
 label_impossible = False
 draw_trajets = False
-
-
-
-
-
-# def redraw_init():
-# 	demarage = True
-# 	if demarage:
-# 		if network_is_trained == False:
-# 			fenetre.blit(pygame.transform.scale(fond_init,(1080,680)), (0,0))
-		
-# 			s = pygame.Surface((500,500), pygame.SRCALPHA)
-# 			s.fill((0,0,0,200))                         
-# 			fenetre.blit(s, (40,40))
-# 			pygame.draw.rect(fenetre, (255,255,255), (40,40,500,500),4)
-
-# 			s = pygame.Surface((1000,100), pygame.SRCALPHA)
-# 			s.fill((0,0,0,200))                         
-# 			fenetre.blit(s, (40,560))
-# 			pygame.draw.rect(fenetre, (255,255,255), (40,560,1000,100),4)
-
-# 			pygame.draw.rect(fenetre, (73,208,57), (90,610,900,40),5)
-
-# 			font_progression = pygame.font.Font(None, 40)
-# 			fenetre.blit(font_progression.render("Progression", 1, (73,208,57)), (450,570))
-# 			pygame.display.flip()	
-# 			#boat1.init_nn()
-# 			network_is_trained = True
-
-
-
-# 		else:
-# 			fenetre.blit(pygame.transform.scale(fond,(1080,680)), (0,0))
-# 			fenetre.blit(depart.image,(depart.X,depart.Y))
-# 			b1.draw(fenetre,(940,550,130,50), (950,560),50)
-# 			b2.draw(fenetre,(940,610,130,50),(945,620),50)
-# 			demarage=False
-
-
 
 
 

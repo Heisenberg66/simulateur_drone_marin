@@ -86,7 +86,7 @@ class Neural_network(object):
 		with tf.Session(graph=self.graph) as session:
 			tf.global_variables_initializer().run()
 
-			for i in range(0,5):
+			for i in range(0,1):
 
 				self.train_dataset, self.test_dataset, self.train_labels, self.test_labels = train_test_split(
 					self.liste_combinaison, self.verite_terrain, test_size = .1, random_state = 12)
@@ -111,11 +111,11 @@ class Neural_network(object):
 
 
 
-	def prediction(self,dat,lab):
+	def predict_result(self,dat):
 
 		with tf.Session(graph=self.graph) as session:
 			tf.global_variables_initializer().run()
-			feed_dict = {self.tf_train_dataset : dat, self.tf_train_labels : lab}
+			feed_dict = {self.tf_train_dataset : dat, self.tf_train_labels : np.array([[0,0,0]])}
 			_, ls, predic = session.run([self.optimizer, self.loss, self.train_prediction],feed_dict=feed_dict)
      		return predic
 

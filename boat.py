@@ -1,6 +1,7 @@
 import pymunk
 import numpy
 import pygame
+import numpy as np
 from math import degrees,radians,sqrt
 from arm_sonar import Arm_sonar
 from neural_network.make_sonar_combinaison import make_combinaisons
@@ -37,6 +38,8 @@ class Boat(pymunk.Body):
 		self.angle_arms = 0
 		self._space=spc
 		self._maxspeed=300
+		self.nn=None
+		self.prediction = np.array([[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]])
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -118,6 +121,8 @@ class Boat(pymunk.Body):
 					self._shape.body.angle -= 0.1
 
 
+		
+
 
 		#ajustement de la vitesse en fonction de l'angle
 		self._speed += self.adjust_speed(wplist,index)
@@ -177,17 +182,25 @@ class Boat(pymunk.Body):
 		self.angle_arms = 30
 		self.rotate_left_right(self.angle_arms)
 
+
 # ----------------------------------------------------------------------------------------------------------------------------------------------
 
 	# Affichage des bras 
 
 	def draw_arms_sonar(self):
 
+		self.prediction=None
+
 		for arm in self.arms_sonar:
 
 			arm.translate_arm(self._body.position[0],self.screen.get_size()[1]-self._body.position[1])
 			self.rotate_left_right(self.angle_arms)
 			arm.draw_arm()
+			self.prediction = np.hstack((self.prediction,arm.vector_prediction)).astype(np.float32)
+		
+		self.prediction = np.delete(self.prediction, 0, axis=0)
+		print(self.nn.predict_result(np.array([self.prediction])))
+
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -302,9 +315,6 @@ class Boat(pymunk.Body):
 		self.nn.setup_network()
 
 		self.nn.train_network()
-
-	def a(self):
-		lol = make_combinaisons(self.screen)
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------		
 #--------------------------------------------------------------- Property ----------------------------------------------------------------------		
