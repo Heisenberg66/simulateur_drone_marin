@@ -100,7 +100,6 @@ fenetre = pygame.display.set_mode((1080,680))
 
 #background
 
-fond_init = pygame.image.load("img/nn.jpeg").convert()
 fond = pygame.image.load("img/mapPortMinimes3.png").convert()
 fenetre.blit(pygame.transform.scale(fond,(1080,680)), (0,0))
 

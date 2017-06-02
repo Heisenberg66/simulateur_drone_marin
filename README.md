@@ -6,23 +6,24 @@
 ### Utilisation des approches d’apprentissage par renforcement (reinforcement learning)
 
 - Encadrants Michel Menard, Bruno Lescalier
-- laboratoire L3i
+- Laboratoire L3i
 - Développement en Python
 
-#### Principe de fonctionnement (pour l'instant) 
+#### Principe de fonctionnement 
 
 Clic gauche sur la carte pour placer un marker, clic droit pour le supprimer. Bouton Clear pour supprimmer tous les markers. Bouton Start pour lancer la simulation. 
-Le "bateau" va suivre le trajet, les rayons détectent les obstacles fixes (pontons, plage,...) mais ne les évite pas pour l'instant. 
-Le simulateur affiche aussi 5bateaux
+Le drone va suivre le trajet, les rayons détectent les obstacles fixes (pontons, plage,...) mais ne les évite pas pour l'instant. 
+Le simulateur affiche aussi 5 bateaux simulés.
+Le drone possède aussi un réseau de neurones qui est entrainé au lancement de l'application. Ce réseau doit prendre des décisions sur la direction du drone en fonction des données envoyées par le sonar.  
 
 #### Description des classes  
 
 - fenetre.py : initialisation + boucle d'événements
 - Button.py : création des objets "boutons" (start/stop et clear)
 - MarkerMap : coordonnées et image des markers
-- boat.py : hérite de Pymunk.body, gestion des mouvments du drone et s des bateaux simulés
+- boat.py : hérite de Pymunk.body, gestion des mouvements du drone et des bateaux simulés
 - arm_sonar : création, translation, rotation d'un bras du sonar
-- point_sonar : création, translation, rotation d'un point d'un bras  du sonar
+- point_sonar : création, translation, rotation d'un point d'un bras du sonar
 - init_trajet_boat : création de 12 trajets pour les bateaux simulés
 - trajet_bateau : déplacement sur un trajet d'un bateau simulé
 - simulation_bateau : gestion des trajets de tous les bateaux simulés
@@ -48,11 +49,11 @@ Le simulateur affiche aussi 5bateaux
 
 Pour installer Ananconda sur mac OSX, cliquez [ici] et suivez le tutoriel.
 
-Une fois installer, lancez le navigateur anaconda puis cliquez sur l'onglez ***environnements***. 
+Une fois installé, lancez le navigateur anaconda puis cliquez sur l'onglet ***environnements***. 
 Cliquez ,en bas de la fenêtre, ensuite sur le bouton ***create***. 
-Entrez un *nom_environnement* et selectionner python 2.7.
+Entrez un *nom_environnement* et selectionnez python 2.7.
 
-Votre environnement anaconda est maintenant créé, cliquez sur cette environnement, cliquez sur la flèche à du nom et selectionnez ***Open terminal***
+Votre environnement anaconda est maintenant créé, cliquez sur cette environnement, cliquez sur la flèche à droite du nom et selectionnez ***Open terminal***
 
 ##### Pygame 
 
@@ -84,7 +85,7 @@ $ pip install --ignore-installed –upgrade https://storage.googleapis.com/tenso
 
 ### Utilisation
 
-Pour lancer le simulateur, entrez la commande si dessous : 
+Pour lancer le simulateur, entrez la commande ci-dessous : 
 
 ```sh
 $ python fenetre.py

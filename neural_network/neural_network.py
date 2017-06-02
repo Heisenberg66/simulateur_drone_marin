@@ -75,7 +75,8 @@ class Neural_network(object):
     
     		# Predictions
 			self.train_prediction = tf.nn.softmax(self.model_scores)
-			#self.test_prediction = tf.nn.softmax(three_layer_network(self.tf_test_dataset))
+			self.test_prediction = tf.nn.softmax(three_layer_network(self.tf_test_dataset))
+			print(self.test_prediction)
 
 
 

@@ -199,8 +199,15 @@ class Boat(pymunk.Body):
 			self.prediction = np.hstack((self.prediction,arm.vector_prediction)).astype(np.float32)
 		
 		self.prediction = np.delete(self.prediction, 0, axis=0)
-		print(self.nn.predict_result(np.array([self.prediction])))
+		predi = self.nn.predict_result(np.array([self.prediction]))
 
+		if (predi[0][0]>=0.99 and predi[0][0]<=1.0) and predi[0][1]<=0.01 and predi[0][2]<=0.01:
+			print("droite")
+		if predi[0][0]<=0.01 and predi[0][1]<=0.01 and (predi[0][2]>=0.99 and predi[0][2]<=1.0):
+			print("gauche")
+		if predi[0][0]<=0.01 and (predi[0][1]>=0.99 and predi[0][1]<=1.0) and predi[0][2]<=0.01:
+			print("milieu")
+		
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
